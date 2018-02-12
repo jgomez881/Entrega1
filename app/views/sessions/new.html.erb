@@ -1,0 +1,26 @@
+
+<div style="width:30%;font-weight:bold;margin:0 auto;font-size:55px;height: 180px;">
+<center>
+<h1>Login</h1>
+</center>
+</div>
+<center>
+<%= form_tag '/login' do %><br>
+  Email: <%= text_field_tag :email,nil, class: 'prueba'%> <br>
+  Contraseña:<%= password_field_tag :password,nil, class: 'prueba' %><br>
+  </center>
+  <div class= "fixed">
+  <div class="col-md-2 col-md-offset-3">
+  	<center>
+  		  <%= submit_tag "Ingresar", class: 'myButton' %>
+  	</center>
+  </div>
+  </div>
+  <label>
+        <input type="checkbox" checked="checked" name="remember"> Recuérdame
+   </label>
+
+
+<%end%>
+</div>
+</div>

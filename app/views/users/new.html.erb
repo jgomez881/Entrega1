@@ -1,0 +1,19 @@
+<div style="width:30%;font-weight:bold;margin:0 auto;font-size:55px;height: 180px; ">
+<h1>Registrarse</h1>
+</div>
+
+<center>
+<%= form_for :user, url: '/users' do |f| %>
+
+  Nombre: <%= f.text_field :name , :class =>'prueba'%><br>
+  Email: <%=f.text_field :email, :class =>'prueba' %><br>
+  Contraseña:<%= f.password_field :password, :class => 'prueba' %><br>
+  Confirmar:<%= f.password_field :password_confirmation,:class => 'prueba'  %><br>
+</center>
+<center>
+     <%= f.submit "Enviar", class: 'myButton' %>
+  </center>
+<% end %>
+
+</div>
+</div>
