@@ -5,13 +5,11 @@
 <center>
 <%= form_for :user, url: '/users' do |f| %>
 
-  Nombre: <%= f.text_field :name , :class =>'prueba'%><br>
-  Email: <%=f.text_field :email, :class =>'prueba' %><br>
+  Nombre: <%= f.text_field :name , :class =>'prueba' %><br>
+  Email: <%= f.text_field :email, :class =>'prueba'  %><br>
   Contraseña:<%= f.password_field :password, :class => 'prueba' %><br>
   Confirmar:<%= f.password_field :password_confirmation,:class => 'prueba'  %><br>
-</center>
-<center>
-     <%= f.submit "Enviar", class: 'myButton' %>
+  <%= f.submit "Enviar", class: 'myButton' %>
   </center>
 <% end %>
 
