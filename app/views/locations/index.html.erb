@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Locations</h1>
+<h1>Lista</h1>
 
 <table>
   <thead>
@@ -22,18 +22,63 @@
         <td><%= location.address %></td>
         <td><%= location.description %></td>
         <td><%= location.title %></td>
-        <td><%= link_to 'Show', location %></td>
-        <td><%= link_to 'Edit', edit_location_path(location) %></td>
-        <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Mostrar', location %></td>
+        <td><%= link_to 'Editar', edit_location_path(location) %></td>
+        <td><%= link_to 'Eliminar', location, method: :delete, data: { confirm: 'Deseas eliminarla?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+<%= link_to 'Crear Nueva Localizacion', new_location_path %> <br>
 
-<%= link_to 'New Location', new_location_path %>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+   $(function() {
+    $.ajaxSetup( {
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+      }
+    });
+  });
+    function getPosition() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+          document.getElementById("latitude").value = latitude;
+          document.getElementById("longitude").value = longitude;
+          $.post('/locations', {location: { latitude: latitude, longitude: longitude, address:"", description:"", title:""} }, function(response){
+            //se envio datos
+          });
+          alert(latitude +" "+ longitude);
+        });
+      } else {
+        alert("Sorry, your browser does not support HTML5 geolocation.");
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  <label>Latitud: </label>
+  <input id="latitude" type="text" name="latitude"</input>
+  <label>Longitud: </label>
+  <input id="longitude" type="text" name="longitude"</input><br>
+  <button type="button" onclick="getPosition();">Obtener lat y long</button>
+  <button type="button" onclick="sendPosition();">Enviar</button>
+<label id="result"></label>
+</body>
+</html>
 <div style='width: 800px;'>
   <div id="map" style='width: 800px; height: 400px;'></div>
 </div>
@@ -45,10 +90,5 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
 }); 
-
-
-
-
-
-
 </script>
+
