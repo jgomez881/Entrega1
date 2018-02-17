@@ -7,10 +7,10 @@ class LocationsController < ApplicationController
   def index
     @locations = Location.all
     #@users = User.all
-    @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
-    marker.lat location.latitude
-    marker.lng location.longitude
-    marker.json({ title: location.title})
+    @hash = Gmaps4rails.build_markers(@locations) do | point, marker|
+    marker.lat point.latitude
+    marker.lng point.longitude
+    marker.json({ title: point.title})
   end
   end
 
